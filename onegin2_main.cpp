@@ -10,6 +10,8 @@ void print_onegin (char** array_of_ptr, size_t count_line);
 void sort_onegin (char** array_of_ptr, size_t count_line);
 int compare (char* first_line, char* second_line);
 
+char conventor_of_symbol (char symbol);
+
 int main ()
 {
     char*  ptr_onegin_text = NULL; 
@@ -47,11 +49,10 @@ int read_onegin (char** ptr_onegin_text, size_t* text_len, size_t* count_line)
     assert (ptr_onegin_text);
     assert (text_len);
 
-    FILE* onegin_file;
-    onegin_file = fopen ("onegin2_text.txt", "r");
+    FILE* onegin_file = NULL;
+    onegin_file = fopen ("onegin2_text.txt", "r");    //командная строка
     if (onegin_file == 0)
     {
-        fclose (onegin_file);
         return 1;
     }
 
@@ -137,7 +138,7 @@ void sort_onegin (char** array_of_ptr, size_t count_line)
 
     for (int g = count_line; g > 0; g--)
     {
-        for (int i = 0; i < g - 1; i++)
+        for (int i = 0; i < g - 1; i++)  // TODO rename iterators
         {
             if (compare (*(array_of_ptr + i), *(array_of_ptr + i + 1)) > 0)     //1 > 2 
             {   
@@ -157,14 +158,15 @@ int compare (char* first_line, char* second_line)
     assert (first_line);
     assert (second_line);
 
-    int i = 0;
+    size_t i = 0;
+    int difference = 0; 
 
-    while (conventor_of_symbol(first_line[i]) - conventor_of_symbol(second_line[i]) == 0 && first_line[i] != '\0')
+    while ((difference = conventor_of_symbol(first_line[i]) - conventor_of_symbol(second_line[i])) == 0 && first_line[i] != '\0')
     {
         i++;
     }
 
-    return first_line[i] - second_line[i];
+    return difference;
 }
 
 char conventor_of_symbol (char symbol)
@@ -183,6 +185,8 @@ char conventor_of_symbol (char symbol)
     {
         return ' ';
     }
+
+    return '\0';
 }
 
 /*size_t len_line (char* line_ptr)
