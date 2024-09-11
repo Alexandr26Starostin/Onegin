@@ -2,15 +2,11 @@
 #include <assert.h>
 #include <stdlib.h>
 
-int  read_onegin (char** ptr_onegin_text, size_t* text_len, size_t* count_line);
-void create_array_of_ptr (char* ptr_onegin_text, size_t text_len, char** array_of_ptr);
-
-void print_onegin (char** array_of_ptr, size_t count_line);
-
-void sort_onegin (char** array_of_ptr, size_t count_line);
-int compare (char* first_line, char* second_line);
-
-char conventor_of_symbol (char symbol);
+#include "onegin_list_of_const.h"
+#include "read_onegin.h"
+#include "create_array_of_ptr.h"
+#include "print_onegin.h"
+#include "sort_onegin.h"
 
 int main ()
 {
@@ -20,7 +16,7 @@ int main ()
 
     if (read_onegin (&ptr_onegin_text, &text_len, &count_line))
     {
-        return 1;
+        return 1;                    //switch
     }
 
     char** array_of_ptr = (char**) calloc (count_line, sizeof (char*)); 
@@ -44,150 +40,8 @@ int main ()
     return 0; 
 }
 
-int read_onegin (char** ptr_onegin_text, size_t* text_len, size_t* count_line)
-{
-    assert (ptr_onegin_text);
-    assert (text_len);
-
-    FILE* onegin_file = NULL;
-    onegin_file = fopen ("onegin2_text.txt", "r");    //командная строка
-    if (onegin_file == 0)
-    {
-        return 1;
-    }
-
-    size_t index_text      = 0;
-    char   symbol          = 0;
-
-    fseek (onegin_file, 0, SEEK_END);
-    size_t count_memory = ftell (onegin_file);
-    fseek (onegin_file, 0, SEEK_SET);
-
-    *ptr_onegin_text = (char*) calloc (count_memory + 1, sizeof (char));
-    if (*ptr_onegin_text == NULL)
-    {
-        fclose (onegin_file);
-        return 2;
-    }
-
-    while ((symbol = fgetc (onegin_file)) != EOF)
-    {
-        *(*ptr_onegin_text + index_text) = symbol;
-
-        if (symbol == '\n')
-        {
-            (*count_line)++;
-
-            *(*ptr_onegin_text + index_text) = '\0';
-        }
-
-        index_text++;
-    } 
-
-    *(*ptr_onegin_text + index_text) = '\0';
-    index_text++;
-
-    *text_len = index_text;
-    (*count_line)++;
-
-    fclose (onegin_file);
-
-    return 0;
-}
-
-
-void create_array_of_ptr (char* ptr_onegin_text, size_t text_len, char** array_of_ptr)
-{
-    assert (array_of_ptr);
-    assert (ptr_onegin_text);
-
-    size_t index_array_of_ptr = 1;
-
-    *(array_of_ptr) = ptr_onegin_text; 
-
-    for (int i = 1; i < text_len - 1; i++)
-    {
-        if (*(ptr_onegin_text + i) == '\0')
-        {
-            *(array_of_ptr + index_array_of_ptr) = (ptr_onegin_text) + (i + 1);
-            index_array_of_ptr++;
-        }
-    } 
-}
-
-void print_onegin (char** array_of_ptr, size_t count_line)
-{
-    for (int i = 0; i < count_line; i++)
-    {
-        printf ("%s\n", *(array_of_ptr + i));
-
-    }
-
-    printf ("\n\n\n");
-}
-
-
 //rifma
 //print sorted
-
-
-
-void sort_onegin (char** array_of_ptr, size_t count_line)
-{
-    assert (array_of_ptr);
-
-    for (int g = count_line; g > 0; g--)
-    {
-        for (int i = 0; i < g - 1; i++)  // TODO rename iterators
-        {
-            if (compare (*(array_of_ptr + i), *(array_of_ptr + i + 1)) > 0)     //1 > 2 
-            {   
-                char* temporary   = array_of_ptr[i];
-                array_of_ptr[i]   = array_of_ptr[i+1];
-                array_of_ptr[i+1] = temporary;
-            }
-        }
-    }
-}
-
-
-
-
-int compare (char* first_line, char* second_line)
-{
-    assert (first_line);
-    assert (second_line);
-
-    size_t i = 0;
-    int difference = 0; 
-
-    while ((difference = conventor_of_symbol(first_line[i]) - conventor_of_symbol(second_line[i])) == 0 && first_line[i] != '\0')
-    {
-        i++;
-    }
-
-    return difference;
-}
-
-char conventor_of_symbol (char symbol)
-{
-    if (symbol >= 'a' && symbol <= 'z')
-    {
-        return symbol;
-    }
-
-    if (symbol >= 'A' && symbol <= 'Z')
-    {
-        return symbol - 'A' + 'a';
-    }
-
-    if (symbol >= ' ' && symbol <= '/' || symbol >= ':' && symbol <= '@')
-    {
-        return ' ';
-    }
-
-    return '\0';
-}
 
 /*size_t len_line (char* line_ptr)
 {
@@ -229,7 +83,5 @@ int compare_for_rhyme (char* first_line, char* second_line)
     size_t index_second = 1;
 
     while (index_first <= first_len && index_second <= )
-
-
 }
 */

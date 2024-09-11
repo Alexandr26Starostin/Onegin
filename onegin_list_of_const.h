@@ -1,0 +1,4 @@
+#ifndef ONEGIN_LIST_OF_CONST_H
+#define ONEGIN_LIST_OF_CONST_H
+
+#endif
