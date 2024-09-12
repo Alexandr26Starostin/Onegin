@@ -15,15 +15,32 @@ int main ()
     size_t text_len        = 0;
     size_t count_line      = 0;
 
-    if (read_onegin (&ptr_onegin_text, &text_len, &count_line))
+    enum errors error_from_read = read_onegin (&ptr_onegin_text, &text_len, &count_line);
+
+    switch (error_from_read)
     {
-        return 1;                    //switch
+        case ERROR_NOT:
+            break;
+        
+        case ERROR_ONE:
+            printf ("Program falled\n");
+            break;
+
+        case ERROR_TWO:
+            printf ("Program falled\n");
+            break;
+        
+        default:
+            printf ("Not find type of error\n");
+            printf ("program falled\n");
+            break;
     }
 
     char** array_of_ptr = (char**) calloc (count_line, sizeof (char*)); 
     if (array_of_ptr == 0)
     {
-        return 4;
+        printf ("Not RAM memory for accomplishment calloc: array_of_ptr\n");
+        return ERROR_THREE;
     }
 
     create_array_of_ptr (ptr_onegin_text, text_len, array_of_ptr);
@@ -38,7 +55,8 @@ int main ()
     free (ptr_onegin_text);
     free (array_of_ptr);
     
-    return 0; 
+    printf ("Program finish\n");
+    return ERROR_NOT; 
 }
 
 //rifma
