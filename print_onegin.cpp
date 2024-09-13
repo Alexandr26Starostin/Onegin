@@ -1,11 +1,15 @@
 #include <stdio.h>
 #include <assert.h>
 
-void print_onegin (char** array_of_ptr, size_t count_line)
+#include "onegin_list_of_const.h"
+
+void print_onegin (struct onegin_data inf_about_text)
 {
-    for (int i = 0; i < count_line; i++)
+    assert (inf_about_text.array_of_ptr);
+
+    for (int number_of_line = 0; number_of_line < inf_about_text.count_line; number_of_line++)
     {
-        printf ("%s\n", *(array_of_ptr + i));
+        printf ("%s\n", inf_about_text.array_of_ptr[number_of_line]);
 
     }
 

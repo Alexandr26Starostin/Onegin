@@ -1,23 +1,24 @@
 #include <stdio.h>
 #include <assert.h>
 
+#include "onegin_list_of_const.h"
 #include "conventor_of_symbol.h"
 
 int static compare (char* first_line, char* second_line);
 
-void sort_onegin (char** array_of_ptr, size_t count_line)
+void sort_onegin (struct onegin_data inf_about_text)           //change for qsort
 {
-    assert (array_of_ptr);
+    assert (inf_about_text.array_of_ptr);
 
-    for (int g = count_line; g > 0; g--)
+    for (int numbers_to_sort = inf_about_text.count_line; numbers_to_sort > 0; numbers_to_sort--)
     {
-        for (int i = 0; i < g - 1; i++)  // TODO rename iterators
+        for (int index_of_pair = 0; index_of_pair < numbers_to_sort - 1; index_of_pair++)
         {
-            if (compare (*(array_of_ptr + i), *(array_of_ptr + i + 1)) > 0)     //1 > 2 
+            if (compare (inf_about_text.array_of_ptr[index_of_pair], inf_about_text.array_of_ptr[index_of_pair+1]) > 0)     //1 > 2 
             {   
-                char* temporary   = array_of_ptr[i];
-                array_of_ptr[i]   = array_of_ptr[i+1];
-                array_of_ptr[i+1] = temporary;
+                char* temporary                              = inf_about_text.array_of_ptr[index_of_pair];
+                inf_about_text.array_of_ptr[index_of_pair]   = inf_about_text.array_of_ptr[index_of_pair+1];
+                inf_about_text.array_of_ptr[index_of_pair+1] = temporary;
             }
         }
     }
@@ -28,12 +29,13 @@ int static compare (char* first_line, char* second_line)
     assert (first_line);
     assert (second_line);
 
-    size_t i = 0;
+    size_t index_symbol = 0;
     int difference = 0; 
 
-    while ((difference = conventor_of_symbol(first_line[i]) - conventor_of_symbol(second_line[i])) == 0 && first_line[i] != '\0')
+    while ((difference = conventor_of_symbol(first_line[index_symbol]) - conventor_of_symbol(second_line[index_symbol])) == 0 
+            && first_line[index_symbol] != '\0')
     {
-        i++;
+        index_symbol++;
     }
 
     return difference;

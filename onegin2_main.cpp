@@ -48,14 +48,14 @@ int main (int argc, char* argv[])
         return ERROR_THREE;
     }
 
-    create_array_of_ptr (inf_about_text.ptr_onegin_text, inf_about_text.text_len, inf_about_text.array_of_ptr);
-    print_onegin (inf_about_text.array_of_ptr, inf_about_text.count_line);
+    create_array_of_ptr (inf_about_text);
+    print_onegin (inf_about_text);
 
-    sort_onegin (inf_about_text.array_of_ptr, inf_about_text.count_line);
-    print_onegin (inf_about_text.array_of_ptr, inf_about_text.count_line);
+    sort_onegin (inf_about_text);
+    print_onegin (inf_about_text);
 
-    rhyme_onegin (inf_about_text.array_of_ptr, inf_about_text.count_line);
-    print_onegin (inf_about_text.array_of_ptr, inf_about_text.count_line);
+    rhyme_onegin (inf_about_text);
+    print_onegin (inf_about_text);
 
     free (inf_about_text.ptr_onegin_text);
     free (inf_about_text.array_of_ptr);

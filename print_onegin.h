@@ -1,6 +1,6 @@
 #ifndef PRINT_ONEGIN_H
 #define PRINT_ONEGIN_H
 
-void print_onegin (char** array_of_ptr, size_t count_line);
+void print_onegin (struct onegin_data inf_about_text);
 
 #endif

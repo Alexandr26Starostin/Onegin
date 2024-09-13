@@ -1,6 +1,6 @@
 #ifndef SORT_ONEGIN_H
 #define SORT_ONEGIN_H
 
-void sort_onegin (char** array_of_ptr, size_t count_line);
+void sort_onegin (struct onegin_data inf_about_text);
 
 #endif
