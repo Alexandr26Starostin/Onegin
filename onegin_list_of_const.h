@@ -4,7 +4,12 @@
 enum errors {ERROR_NOT  = 0,
              ERROR_ONE  = 1,
              ERROR_TWO  = 2,
-             ERROR_THREE = 3
-            };
+             ERROR_THREE = 3};
+
+struct onegin_data {char*  ptr_onegin_text;
+                    size_t text_len;
+                    size_t count_line;
+                    char** array_of_ptr;
+                   };
 
 #endif

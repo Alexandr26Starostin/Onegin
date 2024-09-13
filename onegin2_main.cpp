@@ -9,13 +9,17 @@
 #include "sort_onegin.h"
 #include "rhyme_onegin.h"
 
-int main ()
+int main (int argc, char* argv[])
 {
-    char*  ptr_onegin_text = NULL; 
-    size_t text_len        = 0;
-    size_t count_line      = 0;
+    struct onegin_data inf_about_text {.ptr_onegin_text = NULL,
+                                       .text_len        = 0,
+                                       .count_line      = 0,
+                                       .array_of_ptr    = NULL,
+                                      };
 
-    enum errors error_from_read = read_onegin (&ptr_onegin_text, &text_len, &count_line);
+    enum errors error_from_read = read_onegin (&inf_about_text.ptr_onegin_text, 
+                                               &inf_about_text.text_len, 
+                                               &inf_about_text.count_line);
 
     switch (error_from_read)
     {
@@ -23,41 +27,39 @@ int main ()
             break;
         
         case ERROR_ONE:
-            printf ("Program falled\n");
+            printf ("Program falled in error: 1.\n");
             break;
 
         case ERROR_TWO:
-            printf ("Program falled\n");
+            printf ("Program falled in error: 2.\n");
             break;
         
         default:
-            printf ("Not find type of error\n");
-            printf ("program falled\n");
+            printf ("Not find type of error.\n");
+            printf ("program falled.\n");
             break;
     }
 
-    char** array_of_ptr = (char**) calloc (count_line, sizeof (char*)); 
-    if (array_of_ptr == 0)
+    inf_about_text.array_of_ptr = (char**) calloc (inf_about_text.count_line, sizeof (char*)); 
+    if (inf_about_text.array_of_ptr == NULL)
     {
-        printf ("Not RAM memory for accomplishment calloc: array_of_ptr\n");
+        printf ("Not RAM memory for accomplishment calloc: array_of_ptr.\n");
+        printf ("Program falled in error: 3.\n");
         return ERROR_THREE;
     }
 
-    create_array_of_ptr (ptr_onegin_text, text_len, array_of_ptr);
-    print_onegin (array_of_ptr, count_line);
+    create_array_of_ptr (inf_about_text.ptr_onegin_text, inf_about_text.text_len, inf_about_text.array_of_ptr);
+    print_onegin (inf_about_text.array_of_ptr, inf_about_text.count_line);
 
-    sort_onegin (array_of_ptr, count_line);
-    print_onegin (array_of_ptr, count_line);
+    sort_onegin (inf_about_text.array_of_ptr, inf_about_text.count_line);
+    print_onegin (inf_about_text.array_of_ptr, inf_about_text.count_line);
 
-    rhyme_onegin (array_of_ptr, count_line);
-    print_onegin (array_of_ptr, count_line);
+    rhyme_onegin (inf_about_text.array_of_ptr, inf_about_text.count_line);
+    print_onegin (inf_about_text.array_of_ptr, inf_about_text.count_line);
 
-    free (ptr_onegin_text);
-    free (array_of_ptr);
+    free (inf_about_text.ptr_onegin_text);
+    free (inf_about_text.array_of_ptr);
     
-    printf ("Program finish\n");
+    printf ("Program finish.\n");
     return ERROR_NOT; 
 }
-
-//rifma
-//print sorted
