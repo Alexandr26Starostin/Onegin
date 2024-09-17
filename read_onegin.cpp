@@ -5,14 +5,16 @@
 
 #include "onegin_list_of_const.h"
 
-enum errors read_onegin (char** ptr_onegin_text, size_t* text_len, size_t* count_line)
+enum errors read_onegin (char** ptr_onegin_text, size_t* text_len, size_t* count_line, const char* name_file)
 {
     assert (ptr_onegin_text);
     assert (text_len);
     assert (count_line);
+    assert (name_file);
 
-    FILE* onegin_file = NULL;
-    onegin_file = fopen ("onegin2_text.txt", "r"); 
+    printf ("%s\n", name_file);
+
+    FILE* onegin_file = fopen (name_file, "r"); 
     if (onegin_file == NULL)
     {
         printf ("Not RAM memory for accomplishment fopen: onegin_file\n");

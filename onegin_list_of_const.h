@@ -5,7 +5,8 @@ enum errors {ERROR_NOT   = 0,
              ERROR_ONE   = 1,
              ERROR_TWO   = 2,
              ERROR_THREE = 3,
-             ERROR_FOUR  = 4};
+             ERROR_FOUR  = 4,
+             ERROR_FIVE  = 5};
 
 struct onegin_data {char*  ptr_onegin_text;
                     size_t text_len;

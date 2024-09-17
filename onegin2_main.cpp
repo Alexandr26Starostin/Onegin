@@ -3,6 +3,7 @@
 #include <stdlib.h>
 
 #include "onegin_list_of_const.h"
+#include "find_text.h"
 #include "read_onegin.h"
 #include "create_array_of_ptr.h"
 #include "print_onegin.h"
@@ -13,12 +14,13 @@
 
 int main (int argc, const char* argv[])
 {
-    /*if (find_file (argc, argv))
+    const char* name_file = find_text (argc, argv);
+    if (name_file == NULL)
     {
-        printf ("Program not find file with text. Format: -f<name file>\n");
+        printf ("Program not find file with text. Format: -F<name file>\n");
         printf ("Program falled in error: 4.\n");
         return ERROR_FOUR;
-    }*/
+    }
 
     struct onegin_data inf_about_text {.ptr_onegin_text = NULL,
                                        .text_len        = 0,
@@ -28,7 +30,7 @@ int main (int argc, const char* argv[])
 
     enum errors error_from_read = read_onegin (&inf_about_text.ptr_onegin_text, 
                                                &inf_about_text.text_len, 
-                                               &inf_about_text.count_line);
+                                               &inf_about_text.count_line, name_file);
 
     switch (error_from_read)
     {
@@ -37,15 +39,18 @@ int main (int argc, const char* argv[])
         
         case ERROR_ONE:
             printf ("Program falled in error: 1.\n");
+            return ERROR_ONE;
             break;
 
         case ERROR_TWO:
             printf ("Program falled in error: 2.\n");
+            return ERROR_TWO;
             break;
         
         default:
             printf ("Not find type of error.\n");
-            printf ("program falled.\n");
+            printf ("program falled in error: 5.\n");
+            return ERROR_FIVE;
             break;
     }
 
@@ -72,18 +77,3 @@ int main (int argc, const char* argv[])
     printf ("Program finish.\n");
     return ERROR_NOT; 
 }
-
-/*const char* find_file (int argc, const char** argv)
-{
-    assert (argv);
-
-    for (int number_of_word = 1; number_of_word < argc; number_of_word++)
-    {
-        if (argv[number_of_word][0] = '-' && argv[number_of_word][1] = 'f'):
-        {
-            return (argv[number_of_word] + 3);
-        }
-    }
-
-    return = 0;
-}*/
