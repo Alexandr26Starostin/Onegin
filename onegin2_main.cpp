@@ -4,22 +4,37 @@
 
 #include "onegin_list_of_const.h"
 #include "find_text.h"
+#include "find_clean_file.h"
 #include "read_onegin.h"
 #include "create_array_of_ptr.h"
 #include "print_onegin.h"
 #include "onegin_list_func_sort.h"
 #include "onegin_qsort.h"
 
-//const char* find_file (int argc, const char** argv);
-
 int main (int argc, const char* argv[])
 {
     const char* name_file = find_text (argc, argv);
     if (name_file == NULL)
     {
-        printf ("Program not find file with text. Format: -F<name file>\n");
+        printf ("Program not find file with text. Format: -FR<name file>\n");
         printf ("Program falled in error: 4.\n");
         return ERROR_FOUR;
+    }
+
+    const char* name_clean_file = find_clean_file (argc, argv);
+    if (name_clean_file == NULL)
+    {
+        printf ("Program not find clean file. Format: -FW<name file>\n");
+        printf ("Program falled in error: 6.\n");
+        return ERROR_SIX;
+    }
+
+    FILE* clean_file = fopen (name_clean_file, "w");
+    if (clean_file == NULL)
+    {
+        printf ("Pointer clean_file = 0.\n");
+        printf ("Program falled in error: 7.\n");
+        return ERROR_SEVEN;
     }
 
     struct onegin_data inf_about_text {.ptr_onegin_text = NULL,
@@ -63,16 +78,18 @@ int main (int argc, const char* argv[])
     }
 
     create_array_of_ptr (inf_about_text);
-    print_onegin (inf_about_text);
+    print_onegin (inf_about_text, clean_file);
 
     onegin_qsort (inf_about_text.array_of_ptr, inf_about_text.count_line, sizeof (char**), compare_str);
-    print_onegin (inf_about_text);
+    print_onegin (inf_about_text, clean_file);
 
     onegin_qsort (inf_about_text.array_of_ptr, inf_about_text.count_line, sizeof (char**), compare_str_for_rhyme);
-    print_onegin (inf_about_text);
+    print_onegin (inf_about_text, clean_file);
 
     free (inf_about_text.ptr_onegin_text);
     free (inf_about_text.array_of_ptr);
+
+    fclose (clean_file);
     
     printf ("Program finish.\n");
     return ERROR_NOT; 
