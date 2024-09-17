@@ -6,7 +6,7 @@
 
 int static compare (char* first_line, char* second_line);
 
-void sort_onegin (struct onegin_data inf_about_text)           //change for qsort
+void sort_onegin (struct onegin_data inf_about_text)          
 {
     assert (inf_about_text.array_of_ptr);
 
