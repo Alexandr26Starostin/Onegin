@@ -13,5 +13,5 @@ void print_onegin (struct onegin_data inf_about_text, FILE* clean_file)
         fprintf (clean_file, "%s\n", inf_about_text.array_of_ptr[number_of_line]);
     }
 
-    fprintf (clean_file, "\n\n\n");
+    fprintf (clean_file, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 }

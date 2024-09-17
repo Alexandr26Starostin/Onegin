@@ -5,14 +5,14 @@
 
 #include "onegin_list_of_const.h"
 
+size_t static len_file (FILE* onegin_file);
+
 enum errors read_onegin (char** ptr_onegin_text, size_t* text_len, size_t* count_line, const char* name_file)
 {
     assert (ptr_onegin_text);
     assert (text_len);
     assert (count_line);
     assert (name_file);
-
-    printf ("%s\n", name_file);
 
     FILE* onegin_file = fopen (name_file, "r"); 
     if (onegin_file == NULL)
@@ -21,12 +21,9 @@ enum errors read_onegin (char** ptr_onegin_text, size_t* text_len, size_t* count
         return ERROR_ONE;
     }
 
-    size_t index_text = 0;
-    char   symbol     = 0;
-
-    fseek (onegin_file, 0, SEEK_END);
-    size_t count_memory = ftell (onegin_file);
-    fseek (onegin_file, 0, SEEK_SET);
+    size_t index_text   = 0;
+    char   symbol       = 0;
+    size_t count_memory = len_file (onegin_file);
 
     *ptr_onegin_text = (char*) calloc (count_memory + 1, sizeof (char));
     if (*ptr_onegin_text == NULL)
@@ -60,4 +57,13 @@ enum errors read_onegin (char** ptr_onegin_text, size_t* text_len, size_t* count
     fclose (onegin_file);
 
     return ERROR_NOT;
+}
+
+size_t static len_file (FILE* onegin_file)
+{
+    fseek (onegin_file, 0, SEEK_END);
+    size_t count_memory = ftell (onegin_file);
+    fseek (onegin_file, 0, SEEK_SET);
+
+    return count_memory;
 }

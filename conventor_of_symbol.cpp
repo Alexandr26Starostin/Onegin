@@ -1,19 +1,19 @@
 #include <stdio.h>
 #include <assert.h>
 
-char conventor_of_symbol (char symbol)      //выбор языка через консоль: -rlanguage или -elanguage
+char conventor_of_symbol (char symbol) 
 {
-    if (symbol >= 'a' && symbol <= 'z')
+    if (symbol >= 'a' && symbol <= 'z')     //английские маленькие
     {
         return symbol;
     }
 
-    if (symbol >= 'A' && symbol <= 'Z')
+    if (symbol >= 'A' && symbol <= 'Z')     //английские большие
     {
         return symbol - 'A' + 'a';
     }
 
-    if (symbol >= ' ' && symbol <= '/' || symbol >= ':' && symbol <= '@')
+    if (symbol >= ' ' && symbol <= '@' || symbol >= '[' && symbol <= '`' || symbol >= '{' && symbol <= '~')    //специальные символы
     {
         return ' ';
     }

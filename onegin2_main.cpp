@@ -3,11 +3,14 @@
 #include <stdlib.h>
 
 #include "onegin_list_of_const.h"
+
 #include "find_text.h"
 #include "find_clean_file.h"
+
 #include "read_onegin.h"
 #include "create_array_of_ptr.h"
 #include "print_onegin.h"
+
 #include "onegin_list_func_sort.h"
 #include "onegin_qsort.h"
 
