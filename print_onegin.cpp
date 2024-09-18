@@ -2,18 +2,19 @@
 #include <assert.h>
 
 #include "onegin_list_of_const.h"
+#include "print_onegin.h"
 
-#define SECTION_SPLITTER "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
+#define SEPARATOR_TEXT "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
 
 void print_onegin (struct onegin_data inf_about_text, FILE* clean_file)
 {
     assert (inf_about_text.array_of_ptr);
     assert (clean_file);
 
-    for (int number_of_line = 0; number_of_line < inf_about_text.count_line; number_of_line++)
+    for (size_t number_of_line = 0; number_of_line < inf_about_text.count_line; number_of_line++)
     {
         fprintf (clean_file, "%s\n", inf_about_text.array_of_ptr[number_of_line]);
     }
 
-    fprintf (clean_file, SECTION_SPLITTER);
+    fprintf (clean_file, SEPARATOR_TEXT);
 }
