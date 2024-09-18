@@ -17,7 +17,7 @@
 int main (int argc, const char* argv[])
 {
     const char* name_file = find_text (argc, argv);
-    if (name_file == NULL)
+    if (name_file == NULL)   // TODO Error handler
     {
         printf ("Program not find file with text. Format: -FR<name file>\n");
         printf ("Program falled in error: 4.\n");
@@ -50,7 +50,7 @@ int main (int argc, const char* argv[])
                                                &inf_about_text.text_len, 
                                                &inf_about_text.count_line, name_file);
 
-    switch (error_from_read)
+    switch ((int) error_from_read)
     {
         case ERROR_NOT:
             break;

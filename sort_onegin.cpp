@@ -40,3 +40,5 @@ int static compare (char* first_line, char* second_line)
 
     return difference;
 }
+
+// TODO download cloc - count lines of code

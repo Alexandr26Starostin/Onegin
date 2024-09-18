@@ -14,7 +14,7 @@ int compare_str (void* first_ptr, void* second_ptr)
 	char* second_line = *((char**) second_ptr);
 
     size_t index_symbol = 0;
-    int difference = 0; 
+    int    difference   = 0; 
 
     while ((difference = conventor_of_symbol(first_line[index_symbol]) - conventor_of_symbol(second_line[index_symbol])) == 0 
             && first_line[index_symbol] != '\0')
@@ -37,7 +37,7 @@ int compare_str_for_rhyme (void* first_ptr, void* second_ptr)
     size_t second_len = len_line (second_line);
 
     size_t index_first  = 2;
-    size_t index_second = 2;
+    size_t index_second = 2; // TODO magic number
     
     int difference = 0;
 

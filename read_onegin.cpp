@@ -2,7 +2,6 @@
 #include <assert.h>
 #include <stdlib.h>
 
-
 #include "onegin_list_of_const.h"
 
 size_t static len_file (FILE* onegin_file);
@@ -59,8 +58,10 @@ enum errors read_onegin (char** ptr_onegin_text, size_t* text_len, size_t* count
     return ERROR_NOT;
 }
 
-size_t static len_file (FILE* onegin_file)
-{
+size_t static len_file (FILE* onegin_file)  // TODO const
+{ 
+    assert (onegin_file);
+
     fseek (onegin_file, 0, SEEK_END);
     size_t count_memory = ftell (onegin_file);
     fseek (onegin_file, 0, SEEK_SET);
