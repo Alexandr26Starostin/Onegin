@@ -1,7 +1,8 @@
 #include <stdio.h>
-#include <assert.h>
 
-char conventor_of_symbol (char symbol) 
+#include "conventor_of_symbol.h"
+
+const char conventor_of_symbol (const char symbol) 
 {
     if (symbol >= 'a' && symbol <= 'z')     //английские маленькие
     {

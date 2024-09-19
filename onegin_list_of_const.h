@@ -16,7 +16,7 @@ struct line_data {const char* begin_line,
 struct onegin_data {char*  ptr_onegin_text;
                     size_t text_len;
                     size_t count_line;
-                    (struct line_data)** array_of_struct;
+                    (struct line_data)* array_of_struct;
                    };
 
 #endif

@@ -1,6 +1,6 @@
 CC=g++
 FLAGS=-c -Wshadow -Winit-self -Wredundant-decls -Wcast-align -Wundef -Wfloat-equal -Winline -Wunreachable-code -Wmissing-declarations -Wmissing-include-dirs -Wswitch-enum -Wswitch-default -Weffc++ -Wmain -Wextra -Wall -g -pipe -fexceptions -Wcast-qual -Wconversion -Wctor-dtor-privacy -Wempty-body -Wformat-security -Wformat=2 -Wignored-qualifiers -Wlogical-op -Wmissing-field-initializers -Wnon-virtual-dtor -Woverloaded-virtual -Wpointer-arith -Wsign-promo -Wstack-usage=8192 -Wstrict-aliasing -Wstrict-null-sentinel -Wtype-limits -Wwrite-strings -D_DEBUG -D_EJUDGE_CLIENT_SIDE -D_EJC
-FILES=onegin2_main.o find_text.o find_clean_file.o conventor_of_symbol.o create_array_of_ptr.o print_onegin.o read_onegin.o onegin_list_func_sort.o onegin_qsort.o 
+FILES=onegin2_main.o find_text.o find_clean_file.o conventor_of_symbol.o create_array_of_struct.o print_onegin.o read_onegin.o onegin_list_func_sort.o onegin_qsort.o 
 
 # pathsub
 # addprefix
@@ -26,8 +26,8 @@ read_onegin.o: read_onegin.cpp
 print_onegin.o: print_onegin.cpp
 	$(CC) $(FLAGS) print_onegin.cpp
 
-create_array_of_ptr.o: create_array_of_ptr.cpp
-	$(CC) $(FLAGS) create_array_of_ptr.cpp
+create_array_of_struct.o: create_array_of_struct.cpp
+	$(CC) $(FLAGS) create_array_of_struct.cpp
 
 onegin_list_func_sort.o: onegin_list_func_sort.cpp
 	$(CC) $(FLAGS) onegin_list_func_sort.cpp

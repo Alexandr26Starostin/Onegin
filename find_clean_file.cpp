@@ -14,6 +14,8 @@ const char* find_clean_file (int argc, const char** argv)
 
     for (int number_of_word = 1; number_of_word < argc; number_of_word++)
     {
+        assert (number_of_word >= 1 && number_of_word < argc);
+        
         const char  start_flag         = argv[number_of_word][0];    //Первый символ слова. '-' значит начало флага.
         const char  type_flag          = argv[number_of_word][1];    //Второй символ слова. 'F' значит поиск файла.
         const char  operation_flag     = argv[number_of_word][2];    //Третий символ слова. 'W' значит запись слов в файл.

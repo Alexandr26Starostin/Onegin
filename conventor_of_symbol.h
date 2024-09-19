@@ -1,6 +1,6 @@
 #ifndef CONVENTOR_OF_SYMBOL_H
 #define CONVENTOR_OF_SYMBOL_H
 
-char conventor_of_symbol (char symbol);
+const char conventor_of_symbol (const char symbol);
 
 #endif

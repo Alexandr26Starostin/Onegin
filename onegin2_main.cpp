@@ -8,7 +8,7 @@
 #include "find_clean_file.h"
 
 #include "read_onegin.h"
-#include "create_array_of_ptr.h"
+#include "create_array_of_struct.h"
 #include "print_onegin.h"
 
 #include "onegin_list_func_sort.h"
@@ -94,7 +94,7 @@ int main (int argc, const char* argv[])
             break;
     }
 
-    inf_about_text.array_of_struct = ((struct line_data)**) calloc (inf_about_text.count_line, sizeof ((struct line_data)*));   //Создаём пустой массив структур.
+    inf_about_text.array_of_struct = ((struct line_data)*) calloc (inf_about_text.count_line, sizeof ((struct line_data)));   //Создаём пустой массив структур.
     if (inf_about_text.array_of_struct == NULL)                                                                   //Проверка, что массив структур существует. 
     {
         printf ("Not RAM memory for accomplishment calloc: array_of_struct.\n");
