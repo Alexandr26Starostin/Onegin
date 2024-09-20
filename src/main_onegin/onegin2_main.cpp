@@ -2,17 +2,19 @@
 #include <assert.h>
 #include <stdlib.h>
 
-#include "onegin_list_of_const.h"
+#include "../../include/list_of_const_and_struct/onegin_list_of_const.h"
 
-#include "find_text.h"
-#include "find_clean_file.h"
+#include "../../include/find_name_files/find_text.h"
+#include "../../include/find_name_files/find_clean_file.h"
 
-#include "read_onegin.h"
-#include "create_array_of_struct.h"
-#include "print_onegin.h"
+#include "../../include/read_text/read_onegin.h"
+#include "../../include/read_text/create_array_of_struct.h"
 
-#include "onegin_list_func_sort.h"
-#include "onegin_qsort.h"
+#include "../../include/sort_text/onegin_list_func_sort.h"
+#include "../../include/sort_text/onegin_qsort.h"
+
+#include "../../include/print_text/print_onegin.h"
+#include "../../include/print_text/print_original_onegin.h"
 
 /*
   error 1: Не верен указатель на файл с текстом.
@@ -42,7 +44,7 @@ int main (int argc, const char* argv[])
         return ERROR_NOT_FIND_CLEAN_FILE;
     }
 
-    const FILE* clean_file = fopen (name_clean_file, "w");     //Создаём указатель на чистый файл.
+    FILE* clean_file = fopen (name_clean_file, "w");     //Создаём указатель на чистый файл.
     if (clean_file == NULL)                                    //Проверка указателя на чистый файл.
     {
         printf ("Pointer clean_file = 0.\n");
@@ -94,7 +96,7 @@ int main (int argc, const char* argv[])
             break;
     }
 
-    inf_about_text.array_of_struct = ((struct line_data)*) calloc (inf_about_text.count_line, sizeof ((struct line_data)));   //Создаём пустой массив структур.
+    inf_about_text.array_of_struct = (line_data*) calloc (inf_about_text.count_line, sizeof (line_data));   //Создаём пустой массив структур.
     if (inf_about_text.array_of_struct == NULL)                                                                   //Проверка, что массив структур существует. 
     {
         printf ("Not RAM memory for accomplishment calloc: array_of_struct.\n");
@@ -106,14 +108,15 @@ int main (int argc, const char* argv[])
         return ERROR_WITH_ARRAY_OF_STRUCT;
     }
 
-    create_array_of_ptr (&inf_about_text);           //Создаёт массив структур.
+    create_array_of_struct (&inf_about_text);           //Создаёт массив структур.
+
+    qsort (inf_about_text.array_of_struct, inf_about_text.count_line, sizeof (line_data), &compare_str);   //Сортирует строки от A до Z.
     print_onegin (&inf_about_text, clean_file);      //Печатает в чистый файл по массиву структур.
 
-    onegin_qsort (inf_about_text.array_of_struct, inf_about_text.count_line, sizeof ((struct line_data)**), compare_str);   //Сортирует строки от A до Z.
+    onegin_qsort (inf_about_text.array_of_struct, inf_about_text.count_line, sizeof (line_data), &compare_str_for_rhyme);   //Сортирует строки по рифме.
     print_onegin (&inf_about_text, clean_file);      //Печатает в чистый файл по массиву структур.
 
-    onegin_qsort (inf_about_text.array_of_struct, inf_about_text.count_line, sizeof ((struct line_data)**), compare_str_for_rhyme);   //Сортирует строки по рифме.
-    print_onegin (&inf_about_text, clean_file);      //Печатает в чистый файл по массиву структур.
+    print_original_onegin (&inf_about_text, clean_file); //Печатает оригинальный текст в чистый файл
 
     free (inf_about_text.ptr_onegin_text);      //Освобождаем память.
     free (inf_about_text.array_of_struct);

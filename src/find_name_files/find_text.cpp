@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <assert.h>
 
-#include "find_text.h"
+#include "../../include/find_name_files/find_text.h"
 
 /*Функция получает параметры командной строки argc и argv, 
   ищет флаг -FR, определяющий имя файла с исходным текстом,

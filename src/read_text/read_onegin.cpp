@@ -2,21 +2,21 @@
 #include <assert.h>
 #include <stdlib.h>
 
-#include "onegin_list_of_const.h"
-#include "read_onegin.h"
+#include "../../include/list_of_const_and_struct/onegin_list_of_const.h"
+#include "../../include/read_text/read_onegin.h"
 
-const size_t static len_file (const FILE* onegin_file);
+size_t static len_file (FILE* onegin_file);
 
 /*Записывает текст из файла в память и собирает информацию о тексте: указатель на начало текста, длина текста и количество строк.*/
 
-enum errors read_onegin (const char** ptr_onegin_text, const size_t* text_len, const size_t* count_line, const char* name_file)
+enum errors read_onegin (char** ptr_onegin_text, size_t* text_len, size_t* count_line, const char* name_file)
 {
     assert (ptr_onegin_text);
     assert (text_len);
     assert (count_line);
     assert (name_file);
 
-    const FILE* onegin_file = fopen (name_file, "r");   //Создаёт указатель на файл с текстом.
+    FILE* onegin_file = fopen (name_file, "r");   //Создаёт указатель на файл с текстом.
     if (onegin_file == NULL)                            //Проверка указателя на файл с текстом.
     {
         printf ("Not RAM memory for accomplishment fopen: onegin_file\n");
@@ -36,7 +36,7 @@ enum errors read_onegin (const char** ptr_onegin_text, const size_t* text_len, c
         return ERROR_WITH_PTR_TEXT;
     }
 
-    while ((symbol = fgetc (onegin_file)) != EOF)       //Читает текст.
+    while ((symbol = (char) fgetc (onegin_file)) != EOF)       //Читает текст.
     { 
         if (symbol != '\r')                             //Сводит формат \r\n к \n. Если был формат \n, то он не меняется.
         {
@@ -44,7 +44,7 @@ enum errors read_onegin (const char** ptr_onegin_text, const size_t* text_len, c
 
             if (symbol == '\n')                             //Заменяет '\n' на '\0' и считает количество строк.
             {
-                (*count_line)++;
+                *count_line += 1;
 
                 *(*ptr_onegin_text + index_text) = '\0';
             }
@@ -66,7 +66,7 @@ enum errors read_onegin (const char** ptr_onegin_text, const size_t* text_len, c
 
 /*Считает размер файла.*/
 
-const size_t static len_file (const FILE* onegin_file)      
+size_t static len_file (FILE* onegin_file)      
 { 
     assert (onegin_file);
 

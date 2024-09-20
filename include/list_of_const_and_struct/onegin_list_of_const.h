@@ -10,13 +10,14 @@ enum errors {ERROR_NOT                  = 0,
              ERROR_NOT_FIND_CLEAN_FILE  = 6,
              ERROR_WITH_PTR_CLEAN_FILE  = 7};
 
-struct line_data {const char* begin_line,
-                  const size_t line_len};
+struct line_data {char* begin_line;
+                  size_t len_line;
+                 };
 
 struct onegin_data {char*  ptr_onegin_text;
                     size_t text_len;
                     size_t count_line;
-                    (struct line_data)* array_of_struct;
+                    line_data* array_of_struct;
                    };
 
 #endif

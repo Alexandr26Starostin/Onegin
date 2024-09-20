@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <assert.h>
 
-#include "find_clean_file.h"
+#include "../../include/find_name_files/find_clean_file.h"
 
 /*Функция получает параметры командной строки argc и argv, 
   ищет флаг -FW, определяющий имя чистого файла для записи сортируемого текста,
