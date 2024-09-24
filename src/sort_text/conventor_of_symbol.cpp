@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#include "../../include/sort_text/conventor_of_symbol.h"
+#include "conventor_of_symbol.h"
 
 /*Приводит символы к одному стандарту.*/
 

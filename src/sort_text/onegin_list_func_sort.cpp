@@ -12,8 +12,8 @@ int compare_str (const void* first_ptr, const void* second_ptr)
     assert (first_ptr);
     assert (second_ptr);
 
-    struct line_data first_struct  = *((line_data*) first_ptr);   //Структура с первой строкой.
-    struct line_data second_struct = *((line_data*) second_ptr);  //Структура со второй строкой.
+    struct line_data first_struct  = *((const line_data*) first_ptr);   //Структура с первой строкой.
+    struct line_data second_struct = *((const line_data*) second_ptr);  //Структура со второй строкой.
 
 	char* first_line  = first_struct.begin_line;         //Указатель на первую строку.
 	char* second_line = second_struct.begin_line;        //Указатель на вторую строку.
